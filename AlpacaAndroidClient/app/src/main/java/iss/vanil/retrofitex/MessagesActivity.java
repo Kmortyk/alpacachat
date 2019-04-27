@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     private final static String baseUrl = "http://www.alpaca.host";
     private String accountKey;
+    private String accountName;
 
     private static List<Message> messages;
     private EditText messageEditText;
@@ -47,8 +49,11 @@ public class MessagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
+        accountKey = getIntent().getStringExtra("account_key");
+        accountName = getIntent().getStringExtra("account_name");
+
         messages = new ArrayList<>();
-        adapter = new MessagesRecyclerAdapter(messages);
+        adapter = new MessagesRecyclerAdapter(accountName, messages);
 
         recyclerView = findViewById(R.id.messagesRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,8 +61,6 @@ public class MessagesActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new MessageItemDecoration((int)dp2px(8)));
 
         messageEditText = findViewById(R.id.messageEditText);
-
-        accountKey = getIntent().getStringExtra("account_key");
 
         Button sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener((v) -> sendMessage());
@@ -76,7 +79,7 @@ public class MessagesActivity extends AppCompatActivity {
                 .build();
 
         MessageService service = retrofit.create(MessageService.class);
-        Call<List<Message>> call = service.getMessages(new Account(null, accountKey));
+        Call<List<Message>> call = service.getMessages();
 
         call.enqueue(new Callback<List<Message>>() {
             @Override

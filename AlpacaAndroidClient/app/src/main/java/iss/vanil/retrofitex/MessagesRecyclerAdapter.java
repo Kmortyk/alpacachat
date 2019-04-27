@@ -7,28 +7,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
 import iss.vanil.retrofitex.entity.Message;
 
-class ViewHolder extends RecyclerView.ViewHolder{
+class ViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView nameTextView;
+    static final int TYPE_SENT = 1;
+    static final int TYPE_RECEIVED = 2;
+
     private TextView messageTextView;
+    private TextView nameTextView;
 
-    public ViewHolder(@NonNull View itemView) {
+    ViewHolder(View itemView) {
         super(itemView);
         nameTextView = itemView.findViewById(R.id.message_item_name);
         messageTextView = itemView.findViewById(R.id.message_item_text);
     }
 
-    public void setName(String name) {
-        if(nameTextView != null)
-            nameTextView.setText(name);
-    }
-
-    public void setMessage(String text) {
-        messageTextView.setText(text);
+    void bind(Message message, int messageType) {
+        messageTextView.setText(message.getMessage());
+        if(messageType == TYPE_RECEIVED) { nameTextView.setText(message.getNickname()); }
     }
 
 }
@@ -36,33 +36,44 @@ class ViewHolder extends RecyclerView.ViewHolder{
 public class MessagesRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private final List<Message> messages;
+    private final String curUserNickname;
 
-    public MessagesRecyclerAdapter(List<Message> messages) {
+    public MessagesRecyclerAdapter(String curUserNickname, List<Message> messages) {
         this.messages = messages;
+        this.curUserNickname = curUserNickname;
     }
 
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public int getItemViewType(int position) {
+        Message message = messages.get(position);
 
-        Message curMessage = messages.get(i);
-        View messageView;
+        if (message.getNickname().equals(curUserNickname)) {
+            return ViewHolder.TYPE_SENT;
+        } else {
+            return ViewHolder.TYPE_RECEIVED;
+        }
+    }
 
-        if(curMessage.isSentByUser()) {
-            messageView = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_this, null);
-        }else{
-            messageView = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item, null);
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+
+        if (viewType == ViewHolder.TYPE_SENT) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_sent, parent, false);
+            return new ViewHolder(view);
+        } else if (viewType == ViewHolder.TYPE_RECEIVED) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_item_received, parent, false);
+            return new ViewHolder(view);
         }
 
-        return  new ViewHolder(messageView);
+        throw new InvalidParameterException("MessagesRecyclerAdapter error: not existing viewType.");
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder vh, int i) {
-        Message message = messages.get(i);
-        vh.setName(message.name);
-        vh.setMessage(message.message);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Message message = messages.get(position);
+        holder.bind(message, holder.getItemViewType());
     }
 
     @Override

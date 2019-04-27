@@ -38,13 +38,8 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public String get(@RequestBody String body) {
-
-        JSONObject obj = new JSONObject(body);
-        String accountKey = obj.getString("key");
-
-        return rep.get(accountKey).toString();
-
+    public String get() {
+        return rep.get().toString();
     }
 
 }

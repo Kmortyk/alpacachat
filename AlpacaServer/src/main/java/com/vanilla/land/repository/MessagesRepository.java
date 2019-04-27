@@ -27,33 +27,32 @@ public class MessagesRepository {
                      "accounts.name AS name FROM messages " +
                      "LEFT JOIN accounts ON messages.account_key = accounts.key;";
 
-        return get(sql, null);
+        return get(sql);
 
     }
 
-    public JSONArray get(String key) {
+    public JSONArray get() {
 
         String sql = "SELECT messages.message AS message, " +
                 "accounts.name AS name FROM messages " +
                 "LEFT JOIN accounts ON messages.account_key = accounts.key;";
 
-        return get(sql, key);
+        return get(sql);
 
     }
 
     public JSONArray get(String key, int from, int to) {
 
-        String sql = "SELECT messages.account_key AS account_key " +
-                     "messages.message AS message, " +
+        String sql = "SELECT messages.message AS message, " +
                      "accounts.name AS name FROM messages " +
                      "WHERE messages.id >" + from + " AND messages.id < " + to +
                      "LEFT JOIN accounts ON messages.account_key = accounts.key;";
 
-        return get(sql, key);
+        return get(sql);
 
     }
 
-    private JSONArray get(String sql, String requestAccountKey) {
+    private JSONArray get(String sql) {
 
         JSONArray jsonArr = new JSONArray();
 
@@ -70,12 +69,6 @@ public class MessagesRepository {
                 JSONObject obj = new JSONObject()
                         .put("name", name)
                         .put("message", message);
-
-                if(requestAccountKey != null) {
-                    String accountKey = set.getString("account_key");
-                    if(accountKey.equals(requestAccountKey))
-                        obj.put("cur_user", "true");
-                }
 
                 jsonArr.put(obj);
             }

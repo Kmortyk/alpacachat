@@ -1,21 +1,9 @@
 package com.vanilla.land.repository;
 
-import com.google.gson.JsonObject;
 import com.vanilla.land.entity.Account;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.spec.PBEParameterSpec;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 @Component
 public class AccountsRepository {
@@ -27,12 +15,19 @@ public class AccountsRepository {
     public String createAccount(String name) {
 
         String key = Secure.getKey(10, name);
-        if(key == null) {
-            return "{\"error\":\"Cannot generate secure key for account\"}";
-        }
+        if(key == null) return "";
 
         jdbcTemplate.update("INSERT INTO accounts(\"key\", name) VALUES (?, ?);", key, name);
-        return "{\"account_key\":\"" + getKey(name) + "\"}";
+        return getKey(name);
+
+    }
+
+    public boolean keyExists(String name) {
+
+        String query = "SELECT COUNT(*) FROM accounts WHERE accounts.name = ?";
+        Integer count = jdbcTemplate.queryForObject(query, new Object[] { name }, Integer.class);
+
+        return count != null && count > 0;
 
     }
 

@@ -20,13 +20,15 @@ public class AccountController {
         JSONObject o = new JSONObject(body);
         String name = o.getString("name");
 
-        String key = getAccountKey(body);
+        String key;
 
-        if(key == null) {
-            return createAccount(name);
+        if(rep.keyExists(name)) {
+            key = rep.getKey(name);
+        } else {
+            key = rep.createAccount(name);
         }
 
-        return key;
+        return "{\"account_key\":\"" + key + "\"}";
 
     }
 
@@ -36,7 +38,7 @@ public class AccountController {
         JSONObject o = new JSONObject(body);
         String name = o.getString("name");
 
-        return rep.createAccount(name);
+        return "{\"account_key\":\"" + rep.createAccount(name) + "\"}";
 
     }
 

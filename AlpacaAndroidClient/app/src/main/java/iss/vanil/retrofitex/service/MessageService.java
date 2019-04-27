@@ -22,9 +22,6 @@ public interface MessageService {
     @GET("/message/get")
     Call<List<Message>> getMessages(@Query("from") int from, @Query("to") int to);
 
-    @POST("/message/get")
-    Call<List<Message>> getMessages(@Body Account account);
-
     @POST("/message/send")
     Call<ResponseBody> sendMessage(@Body Message message);
 
