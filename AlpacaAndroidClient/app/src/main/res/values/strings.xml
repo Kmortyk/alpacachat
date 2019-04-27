@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RetrofitEx</string>
+    <string name="enter_message_here">Enter message here...</string>
+    <string name="arrow_right"><![CDATA[>]]></string>
+</resources>

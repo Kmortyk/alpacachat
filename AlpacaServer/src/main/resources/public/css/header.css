@@ -1,0 +1,106 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12 апр. 2019 г., 13:01:11
+    Author     : Пользователь
+*/
+
+@font-face {
+  font-family: 'aMavickFont';
+  src: url('../fonts/aMavickFont.ttf'); /* IE9 Compat Modes */
+}
+
+@font-face {
+  font-family: 'MontserratAlternates';
+  src: url('../fonts/MontserratAlternates.otf'); /* IE9 Compat Modes */
+}
+
+html {
+    height:100%;
+}
+
+body{
+    height:100%;
+    background: linear-gradient(to top right, #7a0cc8, #8a0cff);
+    /*background-color: #8a0cff;*/
+    /*border: 1px solid red;*/
+    margin: 0;
+}
+
+.header{
+    padding: 15pt 0 0 25pt;
+    position: relative;
+    height: 95%;
+    /*border: 1px solid red;*/
+}
+
+.title-text{
+    font-size: 72pt;
+    color: white;
+    font-family: 'aMavickFont', Fallback, sans-serif;
+}
+
+.subtitle-text{
+    font-size: 18pt;
+    font-weight: 100;
+    color: #b8b6b9;
+    font-family: 'MontserratAlternates'; 
+    margin-top: -11pt;
+    padding-left: 2pt;
+}
+
+.bottom-button,
+.hello-text{
+    color: transparent;  
+    text-shadow: 0 0 0 black;
+    position:absolute;
+    bottom: 5pt;
+    font-size: 20pt;
+    font-family: 'aMavickFont', Fallback, sans-serif;
+}
+
+.api-button{ margin: 0 0 2pt 100pt; }
+.about-button{ margin: 0 0 2pt 150pt; }
+
+.bottom-button>a{
+    color: #000;
+    text-decoration: none;
+
+    -o-transition:.2s;
+    -ms-transition:.2s;
+    -moz-transition:.2s;
+    -webkit-transition:.2s;
+    /* ...and now for the proper property */
+    transition:.2s;
+
+}
+.bottom-button>a:hover{ color: #FFF; }
+
+.title-text, 
+.subtitle-text, 
+.hello-text {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+}
+
+.img-holmes{
+    position: absolute;
+    left: 0px;
+    top: 30%;
+    z-index: -1;
+    /*border: 1px solid red;*/
+}
+
+.img-alpaca{
+    position: absolute;
+
+    z-index: -1;
+    height: 50%;
+    right: 10%;
+    bottom: 2%;
+    /*border: 1px solid red;*/
+}

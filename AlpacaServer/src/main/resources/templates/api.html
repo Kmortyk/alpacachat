@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Alpaca chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/api.css">
+
+</head>
+<body>
+
+<div class="header">
+    <div class="title-text">ALPACA CHAT</div>
+    <div class="subtitle-text">Open 24 hours for you</div>
+
+    <div class="api-window">
+
+        <div class="api-window-header">API</div>
+
+        <div class="api-table">
+
+            <table>
+
+                <tr>
+                    <td class="api-url"> <a href="/account/create">/account/create</a> </td>
+                    <td class="api-explanation">Создать новый аккаунт, в запросе указывается имя аккаунта (поле "name"), возвращает json формата {"account_key":"text"}, где account_key - уникальный ключ созданного аккаунта.</td>
+                </tr>
+
+                <tr>
+                    <td class="api-url"> <a href="/account/create">/account/get_key</a> </td>
+                    <td class="api-explanation">Возвращает ключ для уже созданного аккаунта.</td>
+                </tr>
+
+                <tr>
+                    <td class="api-url"> <a href="/account/enter">/account/enter</a> </td>
+                    <td class="api-explanation">Создает новый аккаунт, если имя пользователя введено впервые или "входит" в старый (комбинация из двух предыдущих методов).</td>
+                </tr>
+
+                <tr>
+                    <td class="api-url"> <a href="/message/send">/message/send</a> </td>
+                    <td class="api-explanation">Отправить сообщение, сообщение отправляется в виде {"account_key":"text", "message":"text"}, где account_key - уникальный ключ аккаунта.</td>
+                </tr>
+
+                <tr>
+                    <td class="api-url"> <a href="/message/get_all">/message/get_all</a> </td>
+                    <td class="api-explanation">Получить все сообщения.</td>
+                </tr>
+
+                <tr>
+                    <td class="api-url"> <a href="/message/get">/message/get</a> </td>
+                    <td class="api-explanation">Получить сообщения, в теле запроса можно передать 2 целочисленных поля from и to, с которого и по какое сообщение требуется вернуть соответственно. Если поля отсутствуют, то эквивалентен методу get_all.</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="hello-text"><a href="/">HELLO!👋</a></div>
+    <div class="bottom-button api-button">API</div>
+    <!--<div class="bottom-button about-button"><a href="/about">ABOUT</a></div>-->
+
+</div>
+
+<img class="img-holmes" src="img/holmes.svg" alt="Холмы, на которых живут альпаки.">
+
+</body>
+</html>
