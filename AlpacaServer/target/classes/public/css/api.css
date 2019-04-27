@@ -1,0 +1,98 @@
+.api-window{
+    margin-top: 40pt;
+    width: 800pt;
+    height: 270pt;
+    box-shadow: 0 0 1pt rgba(0,0,0,0.5);
+}
+
+.api-window-header{
+
+    background-color: #2d2a49;
+    height: 10%;
+    width: 100%;
+    color: #f7f6f7;
+    font-size: 20pt;
+    font-family: 'aMavickFont', Fallback, sans-serif;
+    text-indent: 0.3em;
+
+    padding-top: 0.13em;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+
+}
+
+.api-table{
+
+    background-color: #dcd4de;
+    width: 100%;
+    height: 90%;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+}
+
+table{
+
+    height: 100%;
+
+    background-color: #dcd4de;
+    border-collapse: collapse;
+    border-style: hidden;
+
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+
+}
+
+td{
+    text-align: left;
+    vertical-align: top;
+}
+
+td,th{
+    border: 1px dashed #2d2a49;
+    padding:10px;
+}
+
+.hello-text>a{
+    text-decoration: none;
+    color: transparent;
+    text-shadow: 0 0 0 black;
+    -o-transition:.2s;
+    -ms-transition:.2s;
+    -moz-transition:.2s;
+    -webkit-transition:.2s;
+    /* ...and now for the proper property */
+    transition:.2s;
+}
+.hello-text>a:hover{
+    color: transparent;
+    text-shadow: 0 0 0 white;
+}
+
+.api-url>a{
+
+    color: #24043c;
+    text-decoration: underline;
+
+    font-weight: bolder;
+    font-size: 12pt;
+    font-family: sans-serif;
+
+}
+
+.api-header,
+.api-explanation{
+    /*color: #FFFFFF;*/
+    font-size: 12pt;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+td.api-header{
+    height: 15pt;
+    font-weight: bold;
+}
